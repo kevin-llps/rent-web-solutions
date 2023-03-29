@@ -12,24 +12,7 @@ import static fr.esgi.rent.beans.PropertyType.HOUSE;
 public class RentalPropertySample {
 
     public static List<RentalProperty> rentalProperties() {
-        RentalProperty rentalProperty = new RentalProperty(
-                46890,
-                "Appartement spacieux avec vue sur l'ESGI",
-                "Paris",
-                "77 Rue des roses",
-                FLAT,
-                750.90,
-                1200.90,
-                37.48,
-                2,
-                1,
-                3,
-                1990,
-                D,
-                false,
-                false,
-                true,
-                false);
+        RentalProperty rentalProperty = oneRentalProperty();
 
         RentalProperty largeFlat = new RentalProperty(
                 12850,
@@ -87,10 +70,10 @@ public class RentalPropertySample {
                 3,
                 1990,
                 D,
+                false,
+                false,
                 true,
-                true,
-                true,
-                true);
+                false);
     }
 
 }

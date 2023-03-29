@@ -19,4 +19,19 @@
         <location>/error</location>
     </error-page>
 
+    <error-page>
+        <exception-type>fr.esgi.rent.exception.MissingRentalPropertyId</exception-type>
+        <location>/invalid-parameter</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.NumberFormatException</exception-type>
+        <location>/invalid-parameter</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>fr.esgi.rent.exception.NotFoundRentalPropertyException</exception-type>
+        <location>/not-found</location>
+    </error-page>
+
 </web-app>

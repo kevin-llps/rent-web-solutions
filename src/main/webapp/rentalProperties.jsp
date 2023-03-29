@@ -9,14 +9,19 @@
 <body>
 <h1>Liste des locations</h1>
 <p>
-<%
+        <%
     List<RentalProperty> rentalProperties = (List<RentalProperty>) request.getAttribute("rentalProperties");
     for (RentalProperty rentalProperty : rentalProperties) {
 %>
 <ul>
-    <li><% out.println(String.format("%s à louer", rentalProperty.propertyType().getDesignation())); %></li>
+    <li>
+        <a href="/rent-web/details?id=<% out.println(rentalProperty.referenceId()); %>">
+            <% out.println(String.format("%s à louer", rentalProperty.propertyType().getDesignation())); %>
+        </a>
+    </li>
     <li><% out.println(String.format("Loyer mensuel : %s €", rentalProperty.rentAmount())); %></li>
     <li><% out.println(String.format("Surface : %s m²", rentalProperty.area())); %></li>
+    <li><% out.println(String.format("Nombre de chambres : %s", rentalProperty.bedroomsCount())); %></li>
     <li><% out.println(String.format("Nombre de chambres : %s", rentalProperty.bedroomsCount())); %></li>
 </ul>
 <%

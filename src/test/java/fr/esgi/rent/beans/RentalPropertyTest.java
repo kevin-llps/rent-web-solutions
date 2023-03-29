@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import static fr.esgi.rent.beans.EnergyClassification.D;
 import static fr.esgi.rent.beans.PropertyType.FLAT;
-import static fr.esgi.rent.samples.RentalPropertySample.oneRentalProperty;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -55,6 +54,25 @@ class RentalPropertyTest {
         String[] csvValuesWithUnknownPropertyType = {"46890", "Appartement spacieux avec vue sur l'ESGI", "Paris", "77 Rue des roses", "Unknown", "750.90", "1200.90", "37.48", "2", "1", "3", "1990", "D", "non", "non", "oui", "non"};
         String[] csvValuesWithUnknownEnergyClassification = {"46890", "Appartement spacieux avec vue sur l'ESGI", "Paris", "77 Rue des roses", "Appartement", "750.90", "1200.90", "37.48", "2", "1", "3", "1990", "Unknown", "non", "non", "oui", "non"};
 
+        RentalProperty rentalProperty = new RentalProperty(
+                46890,
+                "Appartement spacieux avec vue sur l'ESGI",
+                "Paris",
+                "77 Rue des roses",
+                FLAT,
+                750.90,
+                1200.90,
+                37.48,
+                2,
+                1,
+                3,
+                1990,
+                D,
+                true,
+                true,
+                true,
+                true);
+
         RentalProperty rentalPropertyWithNullPropertyType = new RentalProperty(
                 46890,
                 "Appartement spacieux avec vue sur l'ESGI",
@@ -94,7 +112,7 @@ class RentalPropertyTest {
                 true);
 
         return Stream.of(
-                Arguments.of(csvValues, oneRentalProperty()),
+                Arguments.of(csvValues, rentalProperty),
                 Arguments.of(csvValuesWithUnknownPropertyType, rentalPropertyWithNullPropertyType),
                 Arguments.of(csvValuesWithUnknownEnergyClassification, rentalPropertyWithNullEnergyClassification));
     }
