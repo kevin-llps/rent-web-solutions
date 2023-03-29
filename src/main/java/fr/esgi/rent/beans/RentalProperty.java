@@ -2,6 +2,7 @@ package fr.esgi.rent.beans;
 
 import org.apache.commons.csv.CSVRecord;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import static fr.esgi.rent.beans.PropertyType.FLAT;
@@ -62,4 +63,16 @@ public record RentalProperty(
         return 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RentalProperty that = (RentalProperty) o;
+        return referenceId == that.referenceId && Double.compare(that.rentAmount, rentAmount) == 0 && Double.compare(that.securityDepositAmount, securityDepositAmount) == 0 && Double.compare(that.area, area) == 0 && bedroomsCount == that.bedroomsCount && floorNumber == that.floorNumber && numberOfFloors == that.numberOfFloors && constructionYear == that.constructionYear && hasElevator == that.hasElevator && hasIntercom == that.hasIntercom && hasBalcony == that.hasBalcony && hasParkingSpace == that.hasParkingSpace && Objects.equals(description, that.description) && Objects.equals(town, that.town) && Objects.equals(address, that.address) && propertyType == that.propertyType && energyClassification == that.energyClassification;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(referenceId, description, town, address, propertyType, rentAmount, securityDepositAmount, area, bedroomsCount, floorNumber, numberOfFloors, constructionYear, energyClassification, hasElevator, hasIntercom, hasBalcony, hasParkingSpace);
+    }
 }
