@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 @WebServlet("/rental-properties")
 public class RentalPropertiesConsultationServlet extends HttpServlet {
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         try (PrintWriter printWriter = response.getWriter()) {
