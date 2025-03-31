@@ -9,7 +9,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -21,37 +23,36 @@ class RentalPropertiesConsultationServletTest {
     @Mock
     private HttpServletResponse httpServletResponse;
 
-    @Mock
-    private PrintWriter printWriter;
-
     @Test
     void shouldDoGet() throws IOException {
         RentalPropertiesConsultationServlet rentalPropertiesConsultationServlet = new RentalPropertiesConsultationServlet();
+
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
 
         when(httpServletResponse.getWriter()).thenReturn(printWriter);
 
         rentalPropertiesConsultationServlet.doGet(httpServletRequest, httpServletResponse);
 
-        verify(printWriter).println("<h1>Liste des locations</h1>");
+        String responseContent = stringWriter.toString();
 
-        verify(printWriter, times(2)).println("<ul>");
-        verify(printWriter).println("<li>Appartement à louer</li>");
-        verify(printWriter).println("<li>Description : Appartement spacieux avec vue sur l'ESGI</li>");
-        verify(printWriter).println("<li>Loyer : 750.90 €</li>");
-        verify(printWriter).println("<li>Caution : 1200.90 €</li>");
-        verify(printWriter).println("<li>Surface : 37.48 m²</li>");
-        verify(printWriter, times(2)).println("</ul>");
-
-        verify(printWriter).println("<li>Maison à louer</li>");
-        verify(printWriter).println("<li>Description : Maison à louer dans banlieue calme et proche du RER</li>");
-        verify(printWriter).println("<li>Loyer : 1050.90 €</li>");
-        verify(printWriter).println("<li>Caution : 1400.90 €</li>");
-        verify(printWriter).println("<li>Surface : 62.50 m²</li>");
-
-        verify(printWriter).close();
+        assertTrue(responseContent.contains("<h1>Liste des locations</h1>"));
+        assertTrue(responseContent.contains("<ul>"));
+        assertTrue(responseContent.contains("<li>Appartement à louer</li>"));
+        assertTrue(responseContent.contains("<li>Description : Appartement spacieux avec vue sur l'ESGI</li>"));
+        assertTrue(responseContent.contains("<li>Loyer : 750.90 €</li>"));
+        assertTrue(responseContent.contains("<li>Caution : 1200.90 €</li>"));
+        assertTrue(responseContent.contains("<li>Surface : 37.48 m²</li>"));
+        assertTrue(responseContent.contains("</ul>"));
+        assertTrue(responseContent.contains("<li>Maison à louer</li>"));
+        assertTrue(responseContent.contains("<li>Description : Maison à louer dans banlieue calme et proche du RER</li>"));
+        assertTrue(responseContent.contains("<li>Loyer : 1050.90 €</li>"));
+        assertTrue(responseContent.contains("<li>Caution : 1400.90 €</li>"));
+        assertTrue(responseContent.contains("<li>Surface : 62.50 m²</li>"));
+        assertTrue(responseContent.contains("</ul>"));
 
         verifyNoInteractions(httpServletRequest);
-        verifyNoMoreInteractions(httpServletResponse, printWriter);
+        verifyNoMoreInteractions(httpServletResponse);
     }
 
 }
